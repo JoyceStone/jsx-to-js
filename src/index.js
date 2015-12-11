@@ -3,4 +3,4 @@ RenderDOM.render(
 	document.body
 );
 
-
+console.log(kk);
