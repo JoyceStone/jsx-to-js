@@ -1,0 +1,22 @@
+{
+  "name": "webpack-react",
+  "version": "0.0.1",
+  "author": {
+    "name": "Giraffe"
+  },
+  "description": "transform jsx to js for the browser. ",
+  "dependencies": {
+    "webpack": "1.12.9",
+    "babel-loader": "^6.2.0",
+    "babel-core": "^6.2.1",
+    "babel-preset-react": "^6.1.18"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --content-base build"
+  }
+}
