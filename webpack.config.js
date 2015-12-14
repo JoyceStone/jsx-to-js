@@ -17,14 +17,16 @@ function getJsFilesPath(dir) {
                 getJsFilesPath(p);
             } catch (err) {
                 if (filename.endWith('.js')) {
-                    entries[p.replace(basePath, '').slice(0, -3)] = p;
+                    entries[path.relative(basePath,path.resolve(dir,filename)).slice(0,-3)] = p;
                 }
             }
         });
 
     } catch (e) {
+        console.log(dir);
+        // return ;
         if (dir.endWith('.js')) {
-            entries[p.replace(basePath, '').slice(0, -3)] = p;
+            entries[path.relative(basePath,dir).slice(0,-3)] = dir;
         }
     }
 }
@@ -36,18 +38,12 @@ var path = require('path'),
 
     compileConfigObject = require('./compile.config.js'),
     inputPath = compileConfigObject.inputPath,
-    basePath = path.resolve(__dirname, compileConfigObject.basePath),
+    basePath = path.resolve(__dirname,compileConfigObject.basePath),
 
     entries = {},
-    needCombiledPath = path.resolve(__dirname, inputPath);
-
+    needCombiledPath = path.resolve(basePath, inputPath);
 
 getJsFilesPath(needCombiledPath);
-
-// console.log(entries);
-
-
-// entries.vendors = 'react-bootstrap';
 
 var config = {
     entry: entries,
@@ -69,10 +65,12 @@ var config = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
+        root: path.resolve('D:/jsx-to-js/node_modules'),
         fallback: path.join(__dirname, "node_modules")
     },
     resolveLoader: {
-        root: path.join(__dirname, "node_modules")
+        // root: path.join(__dirname, "node_modules")
+        root: path.resolve('D:/jsx-to-js/node_modules')
     },
     // 压缩 打包
     plugins: [
